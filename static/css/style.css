@@ -175,3 +175,48 @@ p {
 }
 .result-box { margin-top: 2rem; background: var(--dark-bg); padding: 1rem; border-radius: 5px; border: 1px dashed var(--primary-color); }
 .result-box input { width: 100%; background: transparent; border: none; color: var(--primary-color); text-align: center; font-size: 1rem; }
+/* ... mevcut CSS kodlarının sonuna ekle ... */
+
+/* Uzlaşma (Reconciliation) Ekranı Animasyonu */
+.reconciliation-container .icon {
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: popIn 1.5s 0.5s forwards;
+}
+
+#heart-outline {
+    fill: none;
+    stroke: var(--dark-text); /* Kalbin soluk dış çizgisi */
+    stroke-width: 0.5;
+    transition: stroke 0.5s;
+}
+
+#kintsugi-heart:hover #heart-outline {
+    stroke: var(--light-text); /* Üzerine gelince dış çizgi parlasın */
+}
+
+#heart-fill {
+    fill: transparent; /* Başlangıçta dolgu görünmez */
+    stroke: none;
+    transition: fill 2s cubic-bezier(0.25, 1, 0.5, 1); /* Yavaş ve zarif dolum animasyonu */
+}
+
+#kintsugi-heart.repaired #heart-fill {
+    fill: url(#gold-gradient); /* Tıklanınca altın rengi gradient ile doldur */
+}
+
+#kintsugi-heart.repaired {
+    animation: pulse 2s infinite;
+    cursor: default;
+}
+
+@keyframes popIn { 
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--glow-color));}
+}
