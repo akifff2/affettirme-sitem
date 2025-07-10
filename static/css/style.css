@@ -1,25 +1,149 @@
-/* style.css -- SIFIR NOKTASI VERSİYONU */
+/* style.css -- KINTSUGI SÜRÜMÜ */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quicksand:wght@300;500&display=swap');
 
-/* Bu kural çalışırsa, sayfanın arka planı açık gri olmalı. */
+:root {
+    --gold: #D4AF37;
+    --dark-navy: #0a192f;
+    --light-slate: #ccd6f6;
+    --slate: #8892b0;
+    --font-sans: 'Quicksand', sans-serif;
+    --font-serif: 'Cinzel', serif;
+}
+
 body {
-    background-color: #f0f0f0;
-    font-family: sans-serif;
+    background-color: var(--dark-navy);
+    color: var(--slate);
+    font-family: var(--font-sans);
+    margin: 0;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-}
-
-/* Bu kural çalışırsa, başlık kırmızı renkte olmalı. */
-h1 {
-    color: red;
-}
-
-/* Bu kural çalışırsa, tüm içeriğin etrafında siyah kenarlıklı bir kutu olmalı. */
-.test-container {
-    background-color: white;
-    border: 2px solid black;
-    padding: 40px;
     text-align: center;
 }
+
+.container {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1.5s 0.5s forwards;
+    max-width: 600px;
+    padding: 20px;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 {
+    font-family: var(--font-serif);
+    color: var(--light-slate);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.gold-text {
+    color: var(--gold);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.action-link {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 25px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: transparent;
+}
+
+.action-link:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+    color: white;
+}
+
+/* Kintsugi Sayfası Özel Stilleri */
+.kintsugi-container { position: relative; width: 100%; height: 100%; }
+.broken-heart {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px; height: 200px;
+    cursor: pointer;
+}
+.fragment {
+    position: absolute;
+    background-size: 200px 200px;
+    transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1), opacity 1s;
+}
+#yes-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    background-color: var(--gold);
+    color: var(--dark-navy);
+    border: none;
+    padding: 20px 40px;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px var(--gold);
+    transition: all 0.5s;
+}
+.kintsugi-container.repaired #yes-btn {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+/* Son Sayfa */
+.reunion-container img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid var(--gold);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+}
+.reunion-container .note {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--light-slate);
+    margin-top: 30px;
+    padding: 20px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+}
+
+/* Panel Sayfası */
+.panel-container {
+    background-color: #112240;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+    border: 1px solid #233554;
+    max-width: 500px;
+    width: 90%;
+}
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; margin-bottom: 5px; color: var(--light-slate); }
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: #233554;
+    border: 1px solid #303C55;
+    color: var(--light-slate);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.panel-container .action-link { width: 100%; box-sizing: border-box; }
+.result-box { margin-top: 30px; background-color: var(--dark-navy); padding: 15px; border-radius: 4px; }
+.result-box input { width: 100%; background: transparent; border: none; color: var(--gold); text-align: center; }
