@@ -2,20 +2,28 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sıfır Noktası Testi</title>
-
-    <!-- TEK KRİTİK SATIR: CSS dosyasını çağırma -->
-    <!-- Bu satırın doğru çalışıp çalışmadığını test ediyoruz. -->
+    <title>Bir Anı Yarat</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
 </head>
 <body>
-
-    <div class="test-container">
-        <h1>Bu Bir Testtir</h1>
-        <p>Eğer bu yazıyı siyah kenarlıklı bir kutu içinde, kırmızı bir başlıkla ve gri bir arka plan üzerinde görüyorsan, TEMEL SİSTEM ÇALIŞIYOR demektir.</p>
+    <div class="panel-container">
+        <h2>Kintsugi</h2>
+        <p style="text-align: center; margin-bottom: 30px;">Kırık bir anıyı altınla onar.</p>
+        <form method="POST" action="/">
+            <!-- ... form-group'lar buraya ... (bir önceki yanıttan kopyalanabilir) -->
+            <div class="form-group"><label for="gonderen">Senin Adın:</label><input type="text" id="gonderen" name="gonderen" required></div>
+            <div class="form-group"><label for="alici">Onun Adı:</label><input type="text" id="alici" name="alici" required></div>
+            <div class="form-group"><label for="resim_url">İkinizin Resmi (URL):</label><input type="url" id="resim_url" name="resim_url" required></div>
+            <div class="form-group"><label for="sarki_url">Müziğiniz (URL):</label><input type="url" id="sarki_url" name="sarki_url" required></div>
+            <div class="form-group"><label for="not_icerik">Altınla yazılacak notun:</label><textarea id="not_icerik" name="not_icerik" rows="4" required></textarea></div>
+            <button type="submit" class="action-link">Bağlantıyı Oluştur</button>
+        </form>
+        {% if generated_url %}
+        <div class="result-box">
+            <p>Bu bağlantıyı ona gönder:</p>
+            <input type="text" value="{{ generated_url }}" readonly onclick="this.select()">
+        </div>
+        {% endif %}
     </div>
-
 </body>
 </html>
