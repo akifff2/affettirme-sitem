@@ -2,25 +2,46 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Bir Anı Yarat</title>
+    <title>Yeni Bir Deneyim Yarat</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="panel-container">
-        <h2>Kintsugi</h2>
-        <p style="text-align: center; margin-bottom: 30px;">Kırık bir anıyı altınla onar.</p>
+        <h2>Kişisel Deneyim Paneli</h2>
         <form method="POST" action="/">
-            <!-- ... form-group'lar buraya ... (bir önceki yanıttan kopyalanabilir) -->
-            <div class="form-group"><label for="gonderen">Senin Adın:</label><input type="text" id="gonderen" name="gonderen" required></div>
-            <div class="form-group"><label for="alici">Onun Adı:</label><input type="text" id="alici" name="alici" required></div>
-            <div class="form-group"><label for="resim_url">İkinizin Resmi (URL):</label><input type="url" id="resim_url" name="resim_url" required></div>
-            <div class="form-group"><label for="sarki_url">Müziğiniz (URL):</label><input type="url" id="sarki_url" name="sarki_url" required></div>
-            <div class="form-group"><label for="not_icerik">Altınla yazılacak notun:</label><textarea id="not_icerik" name="not_icerik" rows="4" required></textarea></div>
-            <button type="submit" class="action-link">Bağlantıyı Oluştur</button>
+            <div class="form-group"><label>Gönderen:</label><input type="text" name="gonderen" required></div>
+            <div class="form-group"><label>Alıcı:</label><input type="text" name="alici" required></div>
+            <div class="form-group">
+                <label>Sizin Resminiz (URL):</label>
+                <input type="url" name="resim_url" placeholder="https://i.imgur.com/resim.jpg" required>
+                <div class="image-upload-info">İpucu: Resminizi <a href="https://imgur.com/upload" target="_blank" style="color: var(--theme-color);">Imgur</a>'a yükleyip "Direct Link"i buraya yapıştırabilirsiniz.</div>
+            </div>
+            <div class="form-group"><label>Müziğiniz (URL):</label><input type="url" name="sarki_url" placeholder="https://cdn.pixabay.com/audio/..." required></div>
+            <div class="form-group"><label>Ona Özel Notunuz:</label><textarea name="not_icerik" rows="4" required></textarea></div>
+            
+            <hr style="border-color: #233554; margin: 30px 0;">
+            
+            <div class="form-group"><label>Ana Renk:</label><input type="color" name="color" value="#D4AF37"></div>
+            <div class="form-group"><label>Arka Plan Efekti:</label>
+                <select name="background">
+                    <option value="stars">Yıldızlar</option>
+                    <option value="particles">Parçacıklar</option>
+                    <option value="aurora">Kuzey Işıkları</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Onarılacak Simge:</label>
+                <select name="icon">
+                    <option value="heart">Kalp</option>
+                    <option value="star">Yıldız</option>
+                </select>
+            </div>
+
+            <button type="submit" class="action-button">Deneyim Linki Oluştur</button>
         </form>
+
         {% if generated_url %}
         <div class="result-box">
-            <p>Bu bağlantıyı ona gönder:</p>
+            <p style="color: var(--light-text);">Bu linki ona gönderin:</p>
             <input type="text" value="{{ generated_url }}" readonly onclick="this.select()">
         </div>
         {% endif %}
