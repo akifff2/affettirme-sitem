@@ -1,149 +1,160 @@
-/* style.css -- KINTSUGI SÜRÜMÜ */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quicksand:wght@300;500&display=swap');
+/* style.css -- KINTSUGI 2.0: USTALIK ESERİ */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Poppins:wght@300;500&display=swap');
 
 :root {
-    --gold: #D4AF37;
-    --dark-navy: #0a192f;
-    --light-slate: #ccd6f6;
-    --slate: #8892b0;
-    --font-sans: 'Quicksand', sans-serif;
-    --font-serif: 'Cinzel', serif;
+    /* Varsayılan renkler, JS ile üzerine yazılacak */
+    --theme-color: #D4AF37; 
+    --dark-bg: #0a192f;
+    --light-text: #ccd6f6;
+    --dark-text: #8892b0;
+    --font-sans: 'Poppins', sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
 }
 
 body {
-    background-color: var(--dark-navy);
-    color: var(--slate);
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
     font-family: var(--font-sans);
     margin: 0;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
+    width: 100vw;
     text-align: center;
 }
 
-.container {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 1.5s 0.5s forwards;
-    max-width: 600px;
-    padding: 20px;
+/* Arka Plan Efektleri */
+.background-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
 }
 
-@keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
+/* Konteyner ve Animasyonlar */
+.container {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    padding: 20px;
+    max-width: 650px;
+    z-index: 1;
 }
+
+@keyframes fadeIn { to { opacity: 1; } }
 
 h1, h2 {
     font-family: var(--font-serif);
-    color: var(--light-slate);
+    color: var(--light-text);
+    font-size: 2.8rem;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }
-
 p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-top: 0;
+}
+.theme-text {
+    color: var(--theme-color);
+    text-shadow: 0 0 15px var(--theme-color);
 }
 
-.gold-text {
-    color: var(--gold);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-}
-
-.action-link {
+.action-button {
     display: inline-block;
-    margin-top: 30px;
-    padding: 12px 25px;
-    border: 1px solid var(--gold);
-    color: var(--gold);
+    margin-top: 40px;
+    padding: 15px 35px;
+    border: 2px solid var(--theme-color);
+    color: var(--theme-color);
     text-decoration: none;
-    font-family: var(--font-sans);
+    font-size: 1rem;
     font-weight: 500;
-    transition: background-color 0.3s, color 0.3s;
-    background-color: transparent;
+    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+}
+.action-button:hover {
+    background-color: var(--theme-color);
+    color: var(--dark-bg);
+    box-shadow: 0 0 25px var(--theme-color);
 }
 
-.action-link:hover {
-    background-color: rgba(212, 175, 55, 0.1);
-    color: white;
+/* İnteraktif Onarım Sayfası */
+.interactive-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-
-/* Kintsugi Sayfası Özel Stilleri */
-.kintsugi-container { position: relative; width: 100%; height: 100%; }
-.broken-heart {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px; height: 200px;
+#repair-object {
+    width: 300px;
+    height: 300px;
+    cursor: pointer;
+    transition: transform 1s, filter 1s;
+}
+#repair-object.repaired {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px var(--theme-color));
+}
+#repair-object path {
+    transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 1.2s;
     cursor: pointer;
 }
-.fragment {
-    position: absolute;
-    background-size: 200px 200px;
-    transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1), opacity 1s;
+#repair-object path:hover {
+    stroke: var(--theme-color);
+    stroke-width: 2;
 }
-#yes-btn {
+#repair-title {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    background-color: var(--gold);
-    color: var(--dark-navy);
-    border: none;
-    padding: 20px 40px;
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    cursor: pointer;
-    box-shadow: 0 0 20px var(--gold);
-    transition: all 0.5s;
-}
-.kintsugi-container.repaired #yes-btn {
-    transform: translate(-50%, -50%) scale(1);
+    top: 25%;
     opacity: 1;
+    transition: opacity 1s;
 }
 
-/* Son Sayfa */
-.reunion-container img {
-    width: 200px;
-    height: 200px;
+/* Final Sayfası */
+.final-container img {
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
-    border: 5px solid var(--gold);
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+    border: 7px solid var(--theme-color);
+    box-shadow: 0 0 40px -10px var(--theme-color);
+    object-fit: cover;
 }
-.reunion-container .note {
+.final-container .note {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
-    color: var(--light-slate);
-    margin-top: 30px;
-    padding: 20px;
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--light-text);
+    margin-top: 40px;
+    max-width: 80%;
 }
 
 /* Panel Sayfası */
+/* Önceki stili kullanarak daha şık hale getirildi */
 .panel-container {
     background-color: #112240;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
     border: 1px solid #233554;
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
+    text-align: left;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
 }
-.form-group { margin-bottom: 20px; text-align: left; }
-.form-group label { display: block; margin-bottom: 5px; color: var(--light-slate); }
-.form-group input, .form-group textarea {
+.panel-container h2 { text-align: center; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--light-text); }
+.form-group input, .form-group textarea, .form-group select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: #233554;
     border: 1px solid #303C55;
-    color: var(--light-slate);
+    color: var(--light-text);
     border-radius: 4px;
     box-sizing: border-box;
 }
-.panel-container .action-link { width: 100%; box-sizing: border-box; }
-.result-box { margin-top: 30px; background-color: var(--dark-navy); padding: 15px; border-radius: 4px; }
-.result-box input { width: 100%; background: transparent; border: none; color: var(--gold); text-align: center; }
+.panel-container .action-button { width: 100%; text-align: center; }
+.result-box { margin-top: 30px; background-color: var(--dark-bg); padding: 20px; border-radius: 4px; border: 1px dashed var(--theme-color); }
+.result-box input { width: 100%; background: transparent; border: none; color: var(--theme-color); text-align: center; font-size: 1rem; }
+.image-upload-info { font-size: 0.8rem; color: var(--dark-text); padding: 10px; background: #233554; border-radius: 4px; }
