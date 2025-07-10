@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>Kavuşma</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas class="background-canvas" data-bg-type="{{ args.bg }}"></canvas>
+    <div class="container final-container">
+        <img src="{{ args.r }}" alt="Biz">
+        <p class="note">"{{ note }}"</p>
+    </div>
+    <audio id="background-music" src="{{ args.s }}" loop></audio>
+    <script>
+        document.documentElement.style.setProperty('--theme-color', '#{{ args.color }}');
+        // Müzik kontrolü ve fade-in
+        document.addEventListener('DOMContentLoaded', () => {
+            const music = document.getElementById('background-music');
+            music.volume = 0;
+            music.play().catch(() => {});
+            let vol = 0;
+            const fadein = setInterval(() => {
+                if (vol < 1) {
+                    vol = Math.min(1, vol + 0.05);
+                    music.volume = vol;
+                } else {
+                    clearInterval(fadein);
+                }
+            }, 100);
+        });
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
