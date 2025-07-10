@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>Bir Davet...</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <canvas class="background-canvas" data-bg-type="{{ args.bg }}"></canvas>
+    <div class="container">
+        <h1><span class="theme-text">{{ args.a }}</span>,</h1>
+        <p>{{ args.g }} sana bir anı gönderdi.<br>Geçmişin yankısını dinlemeye hazır mısın?</p>
+        <a href="{{ next_url }}" class="action-button">Yolculuğa Başla</a>
+    </div>
+    <script>document.documentElement.style.setProperty('--theme-color', '#{{ args.color }}');</script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
