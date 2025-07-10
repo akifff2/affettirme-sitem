@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>Birleştirme...</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <canvas class="background-canvas" data-bg-type="{{ args.bg }}"></canvas>
+    <div class="interactive-container">
+        <h2 id="repair-title" class="container">Parçalara dokunarak hikayemizi yeniden birleştir.</h2>
+        <!-- SVG Objesi JS tarafından buraya eklenecek -->
+        <div id="repair-object-container" data-icon-type="{{ args.icon }}"></div>
+        <a href="{{ final_url }}" id="final-link" class="action-button" style="opacity:0; pointer-events:none; transition: opacity 1s 0.5s;">Yeniden Biz?</a>
+    </div>
+    <script>document.documentElement.style.setProperty('--theme-color', '#{{ args.color }}');</script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
