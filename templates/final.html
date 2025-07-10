@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- ... kafa kısmı aynı, Dancing Script fontunu eklediğinizden emin olun ... -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&...display=swap" rel="stylesheet">
+</head>
+<body class="final-body">
+    <div id="preloader"><div class="heart">❤️</div></div>
+
+    <div class="final-container animate-container">
+        <img src="{{ kisi_resmi_url }}" alt="Bizim Fotoğrafımız" class="final-image">
+        <div class="note-card">
+            <!-- NOT: Burası JS tarafından doldurulacak -->
+            <div id="typed-note" data-note="{{ kisi_notu }}"></div>
+        </div>
+    </div>
+    
+    <audio id="romantic-song" src="{{ romantik_sarki_url }}" loop></audio>
+    <button id="music-control">▶</button>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
