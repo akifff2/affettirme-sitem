@@ -52,3 +52,26 @@
 @keyframes blink {
     50% { opacity: 0; }
 }
+/* ... mevcut CSS kodlarının sonuna ekle ... */
+
+/* Dalga (Ripple) Efekti */
+.ripple {
+    position: fixed;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    animation: ripple-effect 1s forwards;
+    pointer-events: none;
+}
+@keyframes ripple-effect {
+    from {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    to {
+        width: 300vw;
+        height: 300vw;
+        opacity: 0;
+    }
+}
