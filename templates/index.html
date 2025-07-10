@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Bir Mesaj Var...</title>
+    <!-- ... font ve css linkleri aynı ... -->
+</head>
+<body class="center-body">
+    <div id="preloader"><div class="heart">❤️</div></div>
+
+    <div class="message-box animate-container">
+        <h1>Sana Bir Mesaj Var</h1>
+        <p>Bu mesaj sana <strong>{{ gonderen_isim }}</strong> tarafından gönderildi.</p>
+        <a href="{{ devam_et_linki }}" class="action-button">Mesajı Oku</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
