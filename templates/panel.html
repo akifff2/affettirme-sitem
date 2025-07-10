@@ -2,46 +2,33 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Yeni Bir Deneyim Yarat</title>
+    <title>Deneyim Paneli</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="panel-container">
-        <h2>Kişisel Deneyim Paneli</h2>
+        <h2>Kişisel Deneyim Oluşturucu</h2>
         <form method="POST" action="/">
-            <div class="form-group"><label>Gönderen:</label><input type="text" name="gonderen" required></div>
-            <div class="form-group"><label>Alıcı:</label><input type="text" name="alici" required></div>
-            <div class="form-group">
-                <label>Sizin Resminiz (URL):</label>
-                <input type="url" name="resim_url" placeholder="https://i.imgur.com/resim.jpg" required>
-                <div class="image-upload-info">İpucu: Resminizi <a href="https://imgur.com/upload" target="_blank" style="color: var(--theme-color);">Imgur</a>'a yükleyip "Direct Link"i buraya yapıştırabilirsiniz.</div>
-            </div>
-            <div class="form-group"><label>Müziğiniz (URL):</label><input type="url" name="sarki_url" placeholder="https://cdn.pixabay.com/audio/..." required></div>
-            <div class="form-group"><label>Ona Özel Notunuz:</label><textarea name="not_icerik" rows="4" required></textarea></div>
+            <h4>Temel Bilgiler</h4>
+            <div class="form-group"><label>Gönderen (Senin Adın):</label><input type="text" name="gonderen" required></div>
+            <div class="form-group"><label>Alıcı (Onun Adı):</label><input type="text" name="alici" required></div>
+            <div class="form-group"><label>Sizin Resminiz (URL):</label><input type="url" name="resim_url" placeholder="https://i.imgur.com/resim.jpg" required></div>
+            <div class="form-group"><label>Arka Plan Müziği (URL):</label><input type="url" name="sarki_url" placeholder="https://ornek.com/sarki.mp3" required></div>
             
-            <hr style="border-color: #233554; margin: 30px 0;">
+            <hr>
             
-            <div class="form-group"><label>Ana Renk:</label><input type="color" name="color" value="#D4AF37"></div>
-            <div class="form-group"><label>Arka Plan Efekti:</label>
-                <select name="background">
-                    <option value="stars">Yıldızlar</option>
-                    <option value="particles">Parçacıklar</option>
-                    <option value="aurora">Kuzey Işıkları</option>
-                </select>
-            </div>
-            <div class="form-group"><label>Onarılacak Simge:</label>
-                <select name="icon">
-                    <option value="heart">Kalp</option>
-                    <option value="star">Yıldız</option>
-                </select>
-            </div>
-
+            <h4>Kişiselleştirilebilir Metinler</h4>
+            <div class="form-group"><label>Ana Soru (Örn: Benimle barışır mısın, [İsim]?):</label><input type="text" name="question_text" value="Benimle barışır mısın, {{alici}}?" required></div>
+            <div class="form-group"><label>Evet Butonu Metni:</label><input type="text" name="yes_text" value="Evet, barışalım!" required></div>
+            <div class="form-group"><label>Hayır Butonu Metni:</label><input type="text" name="no_text" value="Hayır" required></div>
+            <div class="form-group"><label>Finaldeki Notun:</label><textarea name="not_icerik" rows="4" required></textarea></div>
+            
             <button type="submit" class="action-button">Deneyim Linki Oluştur</button>
         </form>
 
         {% if generated_url %}
         <div class="result-box">
-            <p style="color: var(--light-text);">Bu linki ona gönderin:</p>
+            <p>Bu linki ona gönderin:</p>
             <input type="text" value="{{ generated_url }}" readonly onclick="this.select()">
         </div>
         {% endif %}
