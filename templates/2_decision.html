@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karar...</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="star-bg"></div>
+
+    <div class="decision-container">
+        <div class="container" style="position: absolute; top: 15%; left: 50%; transform: translateX(-50%);">
+            <h1>{{ args.a }}, <br>bir soru var...</h1>
+        </div>
+        
+        <!-- Evet/Hayır Butonları JS tarafından yönetilecek -->
+        <div id="yes-btn" class="action-button">EVET</div>
+        <div id="no-btn" class="action-button">Hayır</div>
+    </div>
+
+    <script>
+        // Değişkenleri JS'e güvenli bir şekilde aktarıyoruz
+        const RECONCILIATION_URL = "{{ reconciliation_url }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
