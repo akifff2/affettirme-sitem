@@ -336,3 +336,28 @@ p {
 #no-btn {
     top: 100px;
 }
+/* ... mevcut CSS kodlarının sonuna ekle ... */
+
+/* Karar Ekranı (2_decision.html) Yerleşim Garantisi */
+.decision-container {
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.main-question {
+    font-size: 2.8rem;
+    margin-bottom: 4rem;
+}
+
+.button-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Butonların çok fazla dağılmasını engelle */
+    height: 150px; /* Kaçış alanı */
+    margin: 0 auto;
+}
+
+/* Butonların HTML'deki ilk yerleşimi */
+#yes-btn {
+    margin-bottom: 1rem;
+}
