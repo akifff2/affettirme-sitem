@@ -1,3 +1,227 @@
+/* style.css -- YÖNETMENİN KURGUSU (SIFIR HATA) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;500&display=swap');
+
+:root {
+    --primary-color: #E01E5A; /* Daha canlı bir pembe */
+    --glow-color: rgba(224, 30, 90, 0.5);
+    --dark-bg: #10101a;
+    --light-text: #f0f0f5;
+    --dark-text: #8d8d9b;
+    --font-sans: 'Raleway', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    font-family: var(--font-sans);
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Arka Plan: Yavaşça hareket eden yıldızlar */
+.star-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 200%; height: 200%;
+    background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+    animation: move-background 180s linear infinite;
+    z-index: -1;
+}
+@keyframes move-background {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-50%, -50%); }
+}
+
+/* Genel Konteyner ve Geçişler */
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+h1 {
+    font-family: var(--font-serif);
+    font-size: 3.2rem;
+    font-weight: 700;
+    text-shadow: 0 0 15px var(--glow-color);
+}
+p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    font-weight: 300;
+    color: var(--dark-text);
+}
+.highlight {
+    color: var(--light-text);
+    font-weight: 500;
+}
+
+/* Butonlar */
+.action-button {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 1rem 2.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    color: var(--primary-color);
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.action-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 0 25px var(--glow-color);
+    transform: translateY(-5px);
+}
+
+/* Karar Ekranı (Evet/Hayır Oyunu) */
+.decision-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+#yes-btn, #no-btn {
+    position: absolute;
+    width: 150px;
+    padding: 1rem 0;
+    text-align: center;
+}
+#yes-btn {
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    z-index: 2;
+    box-shadow: 0 0 20px var(--glow-color);
+}
+#no-btn {
+    top: 65%; left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    border: 2px solid var(--dark-text);
+    color: var(--dark-text);
+    z-index: 1;
+}
+
+/* Uzlaşma (Reconciliation) Ekranı */
+.reconciliation-container .icon {
+    width: 250px;
+    height: 250px;
+    color: var(--primary-color);
+    opacity: 0;
+    transform: scale(0.7);
+    animation: popIn 1s 0.5s forwards, pulse 2s infinite 1.5s;
+}
+@keyframes popIn { to { opacity: 1; transform: scale(1); } }
+@keyframes pulse {
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--glow-color));}
+}
+
+/* Final Ekranı */
+.finale-container img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 6px solid white;
+    box-shadow: 0 0 35px rgba(255,255,255,0.4);
+    object-fit: cover;
+}
+.finale-container .note {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 2.5rem;
+    max-width: 600px;
+    color: #f0f0f5;
+    line-height: 1.5;
+}
+
+/* Admin Paneli Stilleri (Basitleştirilmiş ve Şık) */
+.panel-container {
+    background: #191921;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid #333;
+    max-width: 550px;
+    width: 90%;
+    text-align: left;
+}
+.panel-container h2 { text-align: center; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; }
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--dark-bg);
+    border: 1px solid #444;
+    color: var(--light-text);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.result-box { margin-top: 2rem; background: var(--dark-bg); padding: 1rem; border-radius: 5px; border: 1px dashed var(--primary-color); }
+.result-box input { width: 100%; background: transparent; border: none; color: var(--primary-color); text-align: center; font-size: 1rem; }
+
+/* ... mevcut CSS kodlarının sonuna ekle ... */
+
+/* Uzlaşma (Reconciliation) Ekranı Animasyonu */
+.reconciliation-container .icon {
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: popIn 1.5s 0.5s forwards;
+}
+
+#heart-outline {
+    fill: none;
+    stroke: var(--dark-text); /* Kalbin soluk dış çizgisi */
+    stroke-width: 0.5;
+    transition: stroke 0.5s;
+}
+
+#kintsugi-heart:hover #heart-outline {
+    stroke: var(--light-text); /* Üzerine gelince dış çizgi parlasın */
+}
+
+#heart-fill {
+    fill: transparent; /* Başlangıçta dolgu görünmez */
+    stroke: none;
+    transition: fill 2s cubic-bezier(0.25, 1, 0.5, 1); /* Yavaş ve zarif dolum animasyonu */
+}
+
+#kintsugi-heart.repaired #heart-fill {
+    fill: url(#gold-gradient); /* Tıklanınca altın rengi gradient ile doldur */
+}
+
+#kintsugi-heart.repaired {
+    animation: pulse 2s infinite;
+    cursor: default;
+}
+
+@keyframes popIn { 
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--glow-color));}
+}
+
 /* ... mevcut CSS kodlarının sonuna ekle ... */
 
 /* Karar Ekranı (2_decision.html) Yerleşim Düzeltmeleri */
