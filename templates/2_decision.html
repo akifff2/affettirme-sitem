@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karar...</title>
+    <title>Bir Karar...</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="star-bg"></div>
-
-    <div class="decision-container">
-        <div class="container" style="position: absolute; top: 15%; left: 50%; transform: translateX(-50%);">
-            <h1>{{ args.a }}, <br>bir soru var...</h1>
-        </div>
+    <div class="container decision-container">
+        <!-- Başlık artık doğrudan Flask tarafından dolduruluyor -->
+        <h1 class="main-question">{{ args.question | replace('{{alici}}', args.a) }}</h1>
         
-        <!-- Evet/Hayır Butonları JS tarafından yönetilecek -->
-        <div id="yes-btn" class="action-button">EVET</div>
-        <div id="no-btn" class="action-button">Hayır</div>
+        <!-- Butonlar en başından beri HTML'de mevcut ve görünür -->
+        <div class="button-wrapper">
+            <div id="yes-btn" class="action-button">{{ args.yes_text }}</div>
+            <div id="no-btn" class="action-button">{{ args.no_text }}</div>
+        </div>
     </div>
 
+    <!-- Bu URL, JS tarafından kullanılacak -->
     <script>
-        // Değişkenleri JS'e güvenli bir şekilde aktarıyoruz
         const RECONCILIATION_URL = "{{ reconciliation_url }}";
     </script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
