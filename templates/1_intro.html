@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <title>Bir Davet...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Özel...</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <canvas class="background-canvas" data-bg-type="{{ args.bg }}"></canvas>
+    <div class="star-bg"></div>
     <div class="container">
-        <h1><span class="theme-text">{{ args.a }}</span>,</h1>
-        <p>{{ args.g }} sana bir anı gönderdi.<br>Geçmişin yankısını dinlemeye hazır mısın?</p>
-        <a href="{{ next_url }}" class="action-button">Yolculuğa Başla</a>
+        <h1><span class="highlight">{{ args.a }}</span>,</h1>
+        <p>Bu site, <span class="highlight">{{ args.g }}</span> tarafından sadece senin için tasarlandı.</p>
+        <a href="{{ next_url }}" class="action-button">Mesajı Gör</a>
     </div>
-    <script>document.documentElement.style.setProperty('--theme-color', '#{{ args.color }}');</script>
+
+    <!-- Bu script'e dokunma, JS'in çalışması için gerekli -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
