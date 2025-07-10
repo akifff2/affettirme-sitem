@@ -3,36 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onarım...</title>
+    <title>Lütfen...</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="star-bg"></div>
 
-    <div class="reconciliation-container container">
-        <!-- Başlık JS tarafından değiştirilecek -->
-        <h2 id="reconciliation-title">Kırık olanı onarmak için dokun...</h2>
+    <div class="decision-container">
+        <!-- Başlık artık daha yüksekte ve butonlardan ayrı -->
+        <div id="decision-text" class="container">
+            <!-- Daktilo efekti için boş bir h1 etiketi -->
+            <h1 class="typewriter"></h1> 
+        </div>
         
-        <!-- Bu SVG, animasyonun temelidir -->
-        <svg id="kintsugi-heart" class="icon" viewBox="0 0 24 24">
-            <defs>
-                <!-- Altın rengi dolgu için bir gradient tanımlıyoruz -->
-                <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#fde047; stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#d4af37; stop-opacity:1" />
-                </linearGradient>
-            </defs>
-            <!-- Kalbin dış çerçevesi -->
-            <path id="heart-outline" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            <!-- Animasyonla dolacak olan kalp -->
-            <path id="heart-fill" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-        
-        <!-- Sonraki sayfaya geçiş butonu JS tarafından görünür yapılacak -->
-        <a href="{{ finale_url }}" id="finale-link" class="action-button" style="opacity: 0; pointer-events: none; transition: opacity 1s;">Hikayemiz Devam Etsin</a>
+        <!-- Butonlar daha aşağıda ve kendi alanlarında -->
+        <div id="button-area">
+            <div id="yes-btn" class="action-button">Evet, barışalım</div>
+            <div id="no-btn" class="action-button">Hayır</div>
+        </div>
     </div>
-
-    <!-- Bu script'e dokunma, JS'in çalışması için gerekli -->
+    
+    <!-- JS'e gerekli bilgileri aktarıyoruz -->
+    <script>
+        const RECONCILIATION_URL = "{{ reconciliation_url }}";
+        const RECIPIENT_NAME = "{{ args.a }}";
+        const TEXT_TO_TYPE = `Lütfen barışalım, ${RECIPIENT_NAME}...`;
+    </script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
