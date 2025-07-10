@@ -1,13 +1,13 @@
-/* style.css -- SÜRÜM 3.0: İNTERAKTİF DESTAN */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@700&display=swap');
+/* style.css -- YÖNETMENİN KURGUSU (SIFIR HATA) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;500&display=swap');
 
 :root {
-    --primary: #f06;
-    --glow: rgba(255, 0, 102, 0.6);
-    --dark-bg: #030615;
-    --light-text: #e0e5f0;
-    --dark-text: #7a8299;
-    --font-sans: 'Montserrat', sans-serif;
+    --primary-color: #E01E5A; /* Daha canlı bir pembe */
+    --glow-color: rgba(224, 30, 90, 0.5);
+    --dark-bg: #10101a;
+    --light-text: #f0f0f5;
+    --dark-text: #8d8d9b;
+    --font-sans: 'Raleway', sans-serif;
     --font-serif: 'Playfair Display', serif;
 }
 
@@ -20,32 +20,22 @@ body {
     height: 100vh;
 }
 
-/* Paralaks Arka Plan */
-.parallax-scene {
+/* Arka Plan: Yavaşça hareket eden yıldızlar */
+.star-bg {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
+    width: 200%; height: 200%;
+    background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+    animation: move-background 180s linear infinite;
     z-index: -1;
-    transition: filter 0.5s;
 }
-.parallax-layer {
-    position: absolute;
-    top: -5%; left: -5%;
-    width: 110%; height: 110%;
-    background-size: cover;
-    background-position: center;
-}
-#vignette-overlay { /* Hayır'a basınca kararma efekti */
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    box-shadow: inset 0 0 0 0 rgba(0,0,0,0);
-    transition: box-shadow 0.3s;
-    pointer-events: none;
-    z-index: 10;
+@keyframes move-background {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-50%, -50%); }
 }
 
-/* Konteyner ve Genel Stiller */
-.content-container {
+/* Genel Konteyner ve Geçişler */
+.container {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -53,113 +43,135 @@ body {
     flex-direction: column;
     text-align: center;
     padding: 20px;
+    box-sizing: border-box;
     opacity: 0;
-    animation: fadeIn 2s 0.5s forwards;
+    animation: fadeIn 2s forwards;
 }
-
 @keyframes fadeIn { to { opacity: 1; } }
 
 h1 {
     font-family: var(--font-serif);
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 0 15px var(--glow);
+    text-shadow: 0 0 15px var(--glow-color);
 }
 p {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     max-width: 600px;
-    line-height: 1.7;
     font-weight: 300;
+    color: var(--dark-text);
 }
-a.button {
-    display: inline-block;
-    margin-top: 40px;
-    padding: 18px 40px;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    background: transparent;
-    text-decoration: none;
-    font-size: 1.1rem;
+.highlight {
+    color: var(--light-text);
     font-weight: 500;
-    border-radius: 50px;
-    transition: all 0.3s;
-}
-a.button:hover {
-    background: var(--primary);
-    color: white;
-    box-shadow: 0 0 25px var(--glow);
-    transform: scale(1.05);
 }
 
-/* Ana Oyun Ekranı */
-.main-event-container {
-    position: relative;
-    width: 100%; height: 100%;
-}
-.game-button {
-    position: absolute;
-    padding: 18px 40px;
+/* Butonlar */
+.action-button {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 1rem 2.5rem;
+    border: 2px solid var(--primary-color);
     border-radius: 50px;
-    font-size: 1.2rem;
-    font-weight: 700;
+    color: var(--primary-color);
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s;
-    user-select: none;
+    transition: all 0.3s ease-in-out;
+}
+.action-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 0 25px var(--glow-color);
+    transform: translateY(-5px);
+}
+
+/* Karar Ekranı (Evet/Hayır Oyunu) */
+.decision-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+#yes-btn, #no-btn {
+    position: absolute;
+    width: 150px;
+    padding: 1rem 0;
+    text-align: center;
 }
 #yes-btn {
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    background: var(--primary);
+    background-color: var(--primary-color);
     color: white;
-    border: 2px solid transparent;
-    box-shadow: 0 0 20px var(--glow);
+    border: none;
     z-index: 2;
+    box-shadow: 0 0 20px var(--glow-color);
 }
 #no-btn {
     top: 65%; left: 50%;
     transform: translate(-50%, -50%);
-    background: #222;
-    color: var(--dark-text);
+    background-color: transparent;
     border: 2px solid var(--dark-text);
+    color: var(--dark-text);
     z-index: 1;
 }
 
-/* Uzlaşma (Kalp) Ekranı */
-.reconciliation-container svg {
-    width: 300px;
+/* Uzlaşma (Reconciliation) Ekranı */
+.reconciliation-container .icon {
+    width: 250px;
+    height: 250px;
+    color: var(--primary-color);
     opacity: 0;
-    transform: scale(0.5);
-    animation: popIn 1s 0.5s forwards;
+    transform: scale(0.7);
+    animation: popIn 1s 0.5s forwards, pulse 2s infinite 1.5s;
 }
-.reconciliation-container path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw 3s 1s forwards;
-}
-
-@keyframes popIn {
-    to { opacity: 1; transform: scale(1); }
-}
-@keyframes draw {
-    to { stroke-dashoffset: 0; }
+@keyframes popIn { to { opacity: 1; transform: scale(1); } }
+@keyframes pulse {
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--glow-color));}
 }
 
 /* Final Ekranı */
 .finale-container img {
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
-    border: 7px solid white;
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+    border: 6px solid white;
+    box-shadow: 0 0 35px rgba(255,255,255,0.4);
+    object-fit: cover;
 }
 .finale-container .note {
     font-family: var(--font-serif);
-    font-size: 2.2rem;
     font-style: italic;
-    margin-top: 40px;
-    max-width: 700px;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 2.5rem;
+    max-width: 600px;
+    color: #f0f0f5;
+    line-height: 1.5;
 }
 
-/* Admin Paneli Stilleri önceki gibi kalabilir */
-/* ... panel.html için olan CSS kodları ... */
+/* Admin Paneli Stilleri (Basitleştirilmiş ve Şık) */
+.panel-container {
+    background: #191921;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid #333;
+    max-width: 550px;
+    width: 90%;
+    text-align: left;
+}
+.panel-container h2 { text-align: center; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; }
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--dark-bg);
+    border: 1px solid #444;
+    color: var(--light-text);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.result-box { margin-top: 2rem; background: var(--dark-bg); padding: 1rem; border-radius: 5px; border: 1px dashed var(--primary-color); }
+.result-box input { width: 100%; background: transparent; border: none; color: var(--primary-color); text-align: center; font-size: 1rem; }
